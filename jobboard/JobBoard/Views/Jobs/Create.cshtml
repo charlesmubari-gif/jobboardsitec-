@@ -1,0 +1,33 @@
+@model JobBoard.Models.Job
+@{
+    ViewData["Title"] = "Create Job";
+}
+<h2>Post a Job</h2>
+
+<form method="post" asp-action="Create">
+    <div class="mb-3">
+        <label>Title</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Location</label>
+        <input asp-for="Location" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Category</label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Salary</label>
+        <input asp-for="Salary" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Deadline</label>
+        <input asp-for="Deadline" class="form-control" type="date" />
+    </div>
+    <button class="btn btn-success">Post Job</button>
+</form>

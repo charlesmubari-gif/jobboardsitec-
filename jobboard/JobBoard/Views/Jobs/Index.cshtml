@@ -1,0 +1,23 @@
+@model IEnumerable<JobBoard.Models.Job>
+@{
+    ViewData["Title"] = "All Jobs";
+}
+<h2>All Jobs</h2>
+
+<table class="table">
+    <thead>
+        <tr><th>Title</th><th>Location</th><th>Category</th><th>Posted</th><th></th></tr>
+    </thead>
+    <tbody>
+    @foreach (var job in Model)
+    {
+        <tr>
+            <td>@job.Title</td>
+            <td>@job.Location</td>
+            <td>@job.Category</td>
+            <td>@job.PostedAt.ToLocalTime().ToString("yyyy-MM-dd")</td>
+            <td><a class="btn btn-sm btn-primary" href="/Jobs/Details/@job.Id">View</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

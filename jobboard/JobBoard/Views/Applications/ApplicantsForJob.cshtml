@@ -1,0 +1,25 @@
+@model IEnumerable<JobBoard.Models.JobApplication>
+@{
+    ViewData["Title"] = "Applicants";
+}
+<h2>Applicants</h2>
+
+<table class="table">
+    <thead><tr><th>Applicant</th><th>Applied</th><th>CV</th><th>Cover</th></tr></thead>
+    <tbody>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.Applicant?.DisplayName (@a.Applicant?.Email)</td>
+            <td>@a.AppliedAt.ToLocalTime().ToString("yyyy-MM-dd")</td>
+            <td>
+                @if (!string.IsNullOrEmpty(a.CvFilePath))
+                {
+                    <a href="@a.CvFilePath" target="_blank">Download</a>
+                }
+            </td>
+            <td>@a.CoverLetter</td>
+        </tr>
+    }
+    </tbody>
+</table>

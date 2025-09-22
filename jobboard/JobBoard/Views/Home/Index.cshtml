@@ -1,0 +1,28 @@
+@model IEnumerable<JobBoard.Models.Job>
+@{
+    ViewData["Title"] = "Jobs";
+}
+<h2>Job Listings</h2>
+
+@if (!Model.Any())
+{
+    <p>No jobs found.</p>
+}
+else
+{
+    <div class="row">
+    @foreach (var job in Model)
+    {
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@job.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@job.Location - @job.Category</h6>
+                    <p class="card-text">@job.Description.Substring(0, Math.Min(150, job.Description.Length))...</p>
+                    <a class="btn btn-primary" href="/Jobs/Details/@job.Id">View</a>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+}

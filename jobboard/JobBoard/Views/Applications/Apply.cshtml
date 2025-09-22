@@ -1,0 +1,18 @@
+@model JobBoard.Models.Job
+@{
+    ViewData["Title"] = "Apply";
+}
+<h2>Apply for: @Model.Title</h2>
+
+<form method="post" enctype="multipart/form-data" asp-action="ApplySubmit">
+    <input type="hidden" name="jobId" value="@Model.Id" />
+    <div class="mb-3">
+        <label>Cover Letter</label>
+        <textarea name="coverLetter" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Upload CV (pdf/doc)</label>
+        <input type="file" name="cv" class="form-control" />
+    </div>
+    <button class="btn btn-success">Submit Application</button>
+</form>

@@ -1,0 +1,32 @@
+@model JobBoard.Models.Job
+@{
+    ViewData["Title"] = Model.Title;
+}
+<h2>@Model.Title</h2>
+<p><strong>Location:</strong> @Model.Location</p>
+<p><strong>Category:</strong> @Model.Category</p>
+<p><strong>Salary:</strong> @Model.Salary</p>
+<p>@Model.Description</p>
+<p><strong>Posted:</strong> @Model.PostedAt.ToLocalTime().ToString("yyyy-MM-dd")</p>
+
+@if (Context.Session.GetInt32("UserId") != null)
+{
+    <a class="btn btn-primary" href="/Applications/Apply?jobId=@Model.Id">Apply</a>
+}
+else
+{
+    <a class="btn btn-secondary" href="/Account/Login">Login to Apply</a>
+}
+
+@{
+    var role = Context.Session.GetString("UserRole");
+    var uid = Context.Session.GetInt32("UserId") ?? 0;
+    if ((role == "Employer" && Model.EmployerId == uid) || role == "Admin")
+    {
+        <a class="btn btn-warning ms-2" href="/Jobs/Edit/@Model.Id">Edit</a>
+        <form method="post" action="/Jobs/Delete/@Model.Id" style="display:inline">
+            <button class="btn btn-danger ms-2" type="submit">Delete</button>
+        </form>
+        <a class="btn btn-info ms-2" href="/Applications/ApplicantsForJob?jobId=@Model.Id">View Applicants</a>
+    }
+}
